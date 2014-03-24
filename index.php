@@ -107,15 +107,15 @@
             <div class="row">
                 <div class="col-lg-4">
                     <h2>Triagem</h2>
-                    <p>Acesse a tela interativa de triagem desenvolvida para aplicar o <strong>Protocolo de Manchester</strong> no atendimento de postos de saÃºde com 
-                        necessidade de auxÃ­lio para agilizar a classificacÃ£o de risco nas unidades de urgÃªncia.
+                    <p>Acesse a tela interativa de triagem desenvolvida para aplicar o <strong>Protocolo de Manchester</strong> no atendimento de postos de saúde com 
+                        necessidade de auxílio para agilizar a classificacão de risco nas unidades de urgência.
                     </p>
                     <p><a class="btn btn-default" href="#">Acessar a triagem &raquo;</a></p>
                 </div>
                 <div class="col-lg-4">
-                    <h2>ManutencÃ£o nos dados</h2>
-                    <p>Nesta secÃ£o vocÃª acessarÃ¡ as telas de manutencao dos <strong>Quadros ClÃ­nicos</strong>, <strong>Sintomas</strong> 
-                        e a tela que vincula os sintomas aos quadros clÃ­nicos. </p>
+                    <h2>Manutencão nos dados</h2>
+                    <p>Nesta secão você acessará as telas de manutencao dos <strong>Quadros Clínicos</strong>, <strong>Sintomas</strong> 
+                        e a tela que vincula os sintomas aos quadros clínicos. </p>
                     <p><a class="btn btn-default" href="#">Modificar dados &raquo;</a></p>
                 </div>
                 <div class="col-lg-4">

@@ -46,9 +46,4 @@ class ClsDatabase {
             return FALSE;            
         }        
     }
-    
-    public function getPDOObject {
-        
-    }
-
 }

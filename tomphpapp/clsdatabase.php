@@ -14,13 +14,13 @@ class ClsDatabase {
     private $userName = 'Albert';
     private $userPassword;
     private $b_isConnected = FALSE;
-    
+
     // Declaracao do construtor da classe
     public function __construct() {
-        // Inicializamos a variavel $dsn com a string de conexao 
+        // Inicializamos a variavel $dsn com a string de conexao
         $this->dsn = 'mysql:host=localhost;dbname=DBTOM;';
         if (not ($this->b_isConnected)) {
-            
+
         }
     }
 
@@ -33,7 +33,6 @@ class ClsDatabase {
             $this->b_isConnected = TRUE;
             return TRUE;
         } catch (PDOException $ex) {
-            echo "Não foi possivel conectar com o banco de dados.<br> Mensagem e erro do sistema: " . $ex->getMessage() . '<br>';
             return FALSE;
         }
     }
@@ -41,9 +40,9 @@ class ClsDatabase {
     // Funcao que retorna o status da conexao
     public function isConnected() {
         if($this->b_isConnected) {
-            return TRUE;            
+            return TRUE;
         } else {
-            return FALSE;            
-        }        
+            return FALSE;
+        }
     }
 }

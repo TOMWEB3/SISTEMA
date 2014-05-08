@@ -1,8 +1,10 @@
 <?php
-include './tomapp/verificarAutenticacao.php';
-include './tomapp/models/sintomas_model.php';
+ini_set('display_errors', 1);
 
-$sintomasDataModel = new ClsSintomasModel($dbh->getDBH(), $_POST['codQuadroClinico']);
+//print "<pre>";
+//var_dump($this);
+//print "</pre>";
+$model = $this->response->sintomas;
 ?>
 
 <!DOCTYPE html>
@@ -14,18 +16,18 @@ $sintomasDataModel = new ClsSintomasModel($dbh->getDBH(), $_POST['codQuadroClini
 
         <title>Treatment of Manchester</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/justified-nav.css" rel="stylesheet">
-        <link href="css/tom.css" rel="stylesheet">
-        <link href="css/sintomas.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/justified-nav.css" rel="stylesheet">
+        <link href="../css/tom.css" rel="stylesheet">
+        <link href="../css/sintomas.css" rel="stylesheet">
 
         <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-        <script src="js/sintomas.js"></script>
+        <script src="../js/sintomas.js"></script>
     </head>
     <body>
         <div class="container">
 
-            <!-- Início Menu -->
+            <!-- Início da barra indicadora -->
             <div class="masthead">
                 <ul class="nav nav-justified">
                     <li id="inicioMenu"><a>Início</a></li>
@@ -34,23 +36,24 @@ $sintomasDataModel = new ClsSintomasModel($dbh->getDBH(), $_POST['codQuadroClini
                     <li id="classificacaoMenu"><a>Classificação</a></li>
                 </ul>
             </div>
-            <!-- Fim Menu -->
+            <!-- Fim da barra indicadora -->
 
             <!-- Início Jumbotron (conteúdo) -->
             <div class="jumbotron" id="sintomasConteudo">
                 <h1 class="titulosSecundarios">Informe os sintomas</h1>
 
-                <div id="row">
-                    <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" method="post" id="frmSintomas">
+                    <div id="row">
+
                         <div class="list-group col-lg-6">
 
                             <?php
-                            foreach ($sintomasDataModel->statement1 as $row) {
+                            foreach ($model->statement1 as $row) {
                                 ?>
                                 <div class="form-group">
-                                    <input type="checkbox" style="float:left;">
+                                    <input type="checkbox" style="float:left;" name="<?php echo $row['COD_SINTOMA']; ?>" value="<?php echo $row['COD_SINTOMA']; ?>">
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email" value="<?php echo utf8_encode($row['SINTOMA']); ?>">
+                                        <input type="text" class="form-control" id="inputEmail3" placeholder="Email" value="<?php echo utf8_encode($row['SINTOMA']); ?>">
                                     </div>
                                 </div>
                             <?php } ?>
@@ -59,25 +62,32 @@ $sintomasDataModel = new ClsSintomasModel($dbh->getDBH(), $_POST['codQuadroClini
                         <div class="list-group col-lg-6">
 
                             <?php
-                            foreach ($sintomasDataModel->statement2 as $row) {
+                            foreach ($model->statement2 as $row) {
                                 ?>
                                 <div class="form-group">
                                     <input type="checkbox" style="float:left;">
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email" value="<?php echo utf8_encode($row['SINTOMA']); ?>">
+                                        <input type="text" class="form-control" id="inputEmail3" placeholder="Email" value="<?php echo utf8_encode($row['SINTOMA']); ?>">
                                     </div>
                                 </div>
                             <?php } ?>
 
-                        </div>
+                        </div>                        
 
-                    </form>
-                </div>
+                    </div>
+                    <div class="list-group col-lg-12">
+                        <div class="list-group col-lg-6">
+                            <button type="button" class="btn btn-default" id="btnCancelar">Cancelar</button>
+                        </div>
+                        <div class="list-group col-lg-6">
+                            <button type="submit" class="btn btn-success" id="btnClassificar">Classificar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <!-- Fim Jumbotron (conteúdo) -->
 
-            <button type="button" class="btn btn-default" id="btnCancelar">Cancelar</button>
-            <button type="submit" class="btn btn-success" id="btnClassificar">Classificar</button>
+
 
             <!-- Site footer -->
             <!--<div class="footer">

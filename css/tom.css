@@ -8,3 +8,33 @@
 .nav-justified > li > a:hover {
     background-color: #E7E7E7;
 }
+.classificacao {
+    margin: auto;
+    width: 150px;
+    height: 75px;
+    border-radius: 10px;
+    background-color: black;
+}
+
+
+
+/* quadros.html */
+#quadrosConteudo > .row > .list-group > a{text-align: left;}
+#quadrosConteudo > .row > .list-group > a:hover{background-color:#dddddd;}
+/* fim */
+
+
+#iconOk{left: 20px;}
+.masthead  span{float: right; padding-top: 0px; padding-bottom: 10px; margin-bottom: 0px; top: -14px; left: 10px;}
+.masthead .glyphicon-ok{color:rgba(50, 205, 50, 0.75);}
+.masthead .glyphicon-flag{color:rgba(223, 49, 49, 0.59);}
+.fluxoConcluidoBorda{
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+}
+.fluxoConcluidoPreenchimento{box-shadow: 0 0 10px rgba(148, 250, 139, 0.6) inset}
+.fluxoPendenteBorda{
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+.fluxoPendentePreenchimento{box-shadow: 0 0 4px rgba(250, 139, 139, 0.6) inset}

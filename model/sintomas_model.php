@@ -1,21 +1,20 @@
 <?php
 
 // Classe que declara o modelo de dados que busca os sintomas
-// vinculados ao quadro clinico informado
 
-class ClsSintomasModel {
+class sintomas extends databaseclass {
 
     private $strQuery;
     public $statement1, $statement2, $statement3;
 
-    private function calculaLimitador(PDO $dbh, $codQuadroClinico) {
+    private function calculaLimitador($codQuadroClinico) {
         $sql = "SELECT COUNT(1)"
                 . " FROM SINTOMAS_QUADROS_CLINICOS "
                 . "WHERE COD_QUADRO_CLINICO = " . $codQuadroClinico;
 
         try {
 
-            $res = $dbh->query($sql);
+            $res = $this->dbh->query($sql);
 
             // Pega o valor do contador
             $contador = $res->fetchColumn();
@@ -30,8 +29,10 @@ class ClsSintomasModel {
     }
 
     function __construct($codQuadroClinico) {
+        
+        parent::__construct();
 
-        $contador = $this->calculaLimitador($dbh, $codQuadroClinico);
+        $contador = $this->calculaLimitador($codQuadroClinico);
         $pos = 0;
 
         //echo '<br>contador: ' . $contador;
@@ -42,9 +43,9 @@ class ClsSintomasModel {
                 . " WHERE SQC.COD_QUADRO_CLINICO = " . $codQuadroClinico
                 . " ORDER BY SNT.SINTOMA";
 
-        $this->statement1 = $dbh->query($this->strQuery . ' LIMIT ' . $pos . ', ' . $contador);
+        $this->statement1 = $this->dbh->query($this->strQuery . ' LIMIT ' . $pos . ', ' . $contador);
         $pos = $contador;
-        $this->statement2 = $dbh->query($this->strQuery . ' LIMIT ' . $pos . ', ' . $contador);
+        $this->statement2 = $this->dbh->query($this->strQuery . ' LIMIT ' . $pos . ', ' . $contador);
     }
 
     // Retorna os sintomas da primeira coluna da view
@@ -56,4 +57,5 @@ class ClsSintomasModel {
     public function getSintomasStatement2() {
         return $this->statement2;
     }
+
 }

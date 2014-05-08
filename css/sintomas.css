@@ -4,3 +4,9 @@
 .form-control {
     cursor: default;
 }
+
+.btn btn-default {
+    float: left;
+    margin: auto;
+}
+

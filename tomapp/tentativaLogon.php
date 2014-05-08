@@ -1,6 +1,6 @@
 <?php
 
-//ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 
 session_start();
 
@@ -24,7 +24,9 @@ class ClsDatabase {
         $this->b_isConnected = FALSE;
         try {
             $this->dbh = new PDO($this->dsn, $userName, $userPassword);
-            
+
+            define('MyConst', TRUE);
+
             // Salvamos o nome do usuario e a senha na variavel $_SESSION
             $_SESSION['userName'] = $userName;
             $_SESSION['userPassword'] = $userPassword;
@@ -33,28 +35,31 @@ class ClsDatabase {
             $this->b_isConnected = TRUE;
             return TRUE;
         } catch (PDOException $ex) {
-            return FALSE;
+            throw $ex;
         }
     }
 
     // Funcao que retorna o status da conexao
     public function isConnected() {
-        if($this->b_isConnected) {
+        if ($this->b_isConnected) {
             return TRUE;
         } else {
             return FALSE;
         }
     }
+
 }
 
 $db = new ClsDatabase();
 
 
-
-if ($db->tryConnect($_POST['iptNomeUsuario'], $_POST['iptSenha'])) {
-    $_SESSION['usuarioAutenticado'] = TRUE;
-    echo 'conectado';    
-}
-else {
-    echo 'erro ao conectar ao banco de dados';
+try {
+    if ($db->tryConnect($_POST['iptNomeUsuario'], $_POST['iptSenha'])) {
+        $_SESSION['usuarioAutenticado'] = TRUE;
+        echo 'conectado';
+    } else {
+        echo 'erro ao conectar ao banco de dados';
+    }
+} catch (PDOException $ex) {
+    echo $ex->getMessage();
 }

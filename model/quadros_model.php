@@ -1,18 +1,20 @@
 <?php
 
 // Classe que declara o modelo de dados que busca os quadros clínicos
-class ClsQuadrosModel {
+ini_set('display_errors', 1);
+
+class quadros extends databaseclass {
 
     private $strQuery;
     public $statement1, $statement2, $statement3;
 
-    private function calculaLimitador(PDO $dbh) {
+    private function calculaLimitador() {
         $sql = "SELECT COUNT(1)"
                 . " FROM QUADROS_CLINICOS";
 
         try {
 
-            $res = $dbh->query($sql);
+            $res = $this->dbh->query($sql);
 
             // Pega o valor do contador
             $contador = $res->fetchColumn();
@@ -25,20 +27,21 @@ class ClsQuadrosModel {
         }
     }
 
-    function __construct(PDO $dbh) {
+    function __construct() {
+        parent::__construct();
 
-        $contador = $this->calculaLimitador($dbh);
+        $contador = $this->calculaLimitador();
         $pos = 0;
 
         $this->strQuery = "SELECT * "
                 . "  FROM QUADROS_CLINICOS QDC "
                 . " ORDER BY QDC.COD_QUADRO_CLINICO";
 
-        $this->statement1 = $dbh->query($this->strQuery . ' LIMIT ' . ($pos) . ', ' . $contador);
+        $this->statement1 = $this->dbh->query($this->strQuery . ' LIMIT ' . ($pos) . ', ' . $contador);
         $pos = $contador;
-        $this->statement2 = $dbh->query($this->strQuery . ' LIMIT ' . ($pos) . ', ' . $contador);
+        $this->statement2 = $this->dbh->query($this->strQuery . ' LIMIT ' . ($pos) . ', ' . $contador);
         $pos = 2 * $contador;
-        $this->statement3 = $dbh->query($this->strQuery . ' LIMIT ' . ($pos) . ', ' . $contador);
+        $this->statement3 = $this->dbh->query($this->strQuery . ' LIMIT ' . ($pos) . ', ' . $contador);
     }
 
     public function getQuadrosStatement1() {
@@ -51,5 +54,6 @@ class ClsQuadrosModel {
 
     public function getQuadrosStatement3() {
         return $this->statement3;
-    }
+    }   
+
 }
